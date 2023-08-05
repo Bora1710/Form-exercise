@@ -9,7 +9,7 @@ import { Validators } from '@angular/forms';
 })
 export class HomeComponent {
   genderOptions = ['Male', 'Female', 'Other']
-  user = { name: '', gender: '', date: '', age: 0};
+  user = { name: '', gender: '', date: '', age: 0, contact: {phone: ''}};
   maxDate: string;
   calculatedAge!: number;
 
@@ -18,6 +18,7 @@ export class HomeComponent {
     gender: new FormControl(this.user.gender, Validators.required),
     date: new FormControl(this.user.date, Validators.required),
     age: new FormControl(this.user.age),
+    contact: new FormControl(this.user.contact.phone, Validators.required)
   });
   
   constructor () {let today = new Date();
@@ -34,6 +35,10 @@ export class HomeComponent {
 
   get date() {
     return this.userForm.get('date')!;
+  }
+
+  get contact() {
+    return this.userForm.get('contact');
   }
 
   onDateChange(event: Event) {
