@@ -1,4 +1,6 @@
 <form [formGroup]="userForm" #formDir="ngForm">
+  <div [hidden]="formDir.submitted">
+
   <div
     class="cross-validation"
     [class.cross-validation-error]="userForm.errors?.['identityRevealed'] && (userForm.touched || userForm.dirty)"
@@ -147,4 +149,11 @@
   <button type="button" class="btn btn-default" (click)="formDir.resetForm({})">
     Reset
   </button>
+</div>
+
+  <div class="submitted-message" *ngIf="formDir.submitted">
+    <p>You've submitted your hero, {{ userForm.value.name }}!</p>
+    <button type="button" (click)="formDir.resetForm({})">Add new user</button>
+  </div>
+
 </form>
