@@ -19,6 +19,18 @@
         <div *ngIf="name.errors?.['required']">Name is required.</div>
       </div>
     </div>
+
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select id="gender" class="form-control"
+          formControlName="gender" required>
+        <option *ngFor="let g of genderOptions" [value]="g">{{g}}</option>
+      </select>
+
+      <div *ngIf="gender.invalid && gender.touched" class="alert alert-danger">
+        <div *ngIf="gender.errors?.['required']">Gender is required.</div>
+      </div>
+    </div>
   </div>
 
   <button type="submit"
