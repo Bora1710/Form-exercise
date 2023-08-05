@@ -1,43 +1,27 @@
 <form [formGroup]="userForm">
-  <div>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" />
+  <div
+    class="cross-validation"
+    [class.cross-validation-error]="userForm.errors?.['identityRevealed'] && (userForm.touched || userForm.dirty)"
+  >
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        formControlName="name"
+        required
+      />
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="name.errors?.['required']">Name is required.</div>
+      </div>
+    </div>
   </div>
-  <div>
-    <label for="gender">Gender:</label>
-    <select id="gender" name="gender">
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-      <option value="other">Other</option>
-    </select>
-  </div>
-  <div>
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" />
-  </div>
-  <div>
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" readonly />
-  </div>
-  <div>
-    <label for="contact">Contact details:</label>
-    <input type="text" id="contact" name="contact" />
-  </div>
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" />
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" />
-  </div>
-  <div>
-    <label for="passwordRepeat">Repeat password:</label>
-    <input type="password" id="passwordRepeat" name="passwordRepeat" />
-  </div>
-  <div>
-    <label for="hobies">Hobies:</label>
-    <input type="checkbox" id="hobies" name="hobies" />
-  </div>
-  <button [disabled]="!userForm.valid">Submit</button>
+
+  <button type="submit"
+  class="btn btn-default"
+  [disabled]="userForm.invalid">Submit</button>
 </form>
