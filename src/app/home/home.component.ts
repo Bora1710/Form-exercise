@@ -17,6 +17,7 @@ export class HomeComponent {
     contact: { phone: '' },
     email: '',
     password: '',
+    passwordRepeat: '',
   };
   maxDate: string;
   calculatedAge!: number;
@@ -33,6 +34,7 @@ export class HomeComponent {
     ]),
     // Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$') email
     password: new FormControl(this.user.password, [Validators.required, Validators.pattern("^(?=.*[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$")]),
+    passwordRepeat: new FormControl(this.user.passwordRepeat , Validators.required),
   });
 
   constructor() {
@@ -66,6 +68,10 @@ export class HomeComponent {
 
   get password() {
     return this.userForm.get('password');
+  }
+
+  get passwordRepeat() {
+    return this.userForm.get('passwordRepeat');
   }
 
   onDateChange(event: Event) {
