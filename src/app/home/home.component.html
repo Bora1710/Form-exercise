@@ -1,4 +1,4 @@
-<form [formGroup]="userForm">
+<form [formGroup]="userForm" #formDir="ngForm">
   <div
     class="cross-validation"
     [class.cross-validation-error]="userForm.errors?.['identityRevealed'] && (userForm.touched || userForm.dirty)"
@@ -112,7 +112,9 @@
       class="alert alert-danger"
     >
       <div *ngIf="password!.errors?.['required']">Password is required.</div>
-      <div *ngIf="password!.errors?.['pattern']">min length 8, at least one uppercase, at least one number</div>
+      <div *ngIf="password!.errors?.['pattern']">
+        min length 8, at least one uppercase, at least one number
+      </div>
     </div>
   </div>
 
@@ -126,15 +128,23 @@
       required
     />
     <div
-      *ngIf="passwordRepeat!.invalid && (passwordRepeat!.dirty || passwordRepeat!.touched)"
+      *ngIf="
+        passwordRepeat!.invalid &&
+        (passwordRepeat!.dirty || passwordRepeat!.touched)
+      "
       class="alert alert-danger"
     >
-      <div *ngIf="passwordRepeat!.errors?.['required']">Repeat password is required.</div>
+      <div *ngIf="passwordRepeat!.errors?.['required']">
+        Repeat password is required.
+      </div>
       <!-- <div *ngIf="password!.errors?.['pattern']">min length 8, at least one uppercase, at least one number</div> -->
     </div>
   </div>
 
   <button type="submit" class="btn btn-default" [disabled]="userForm.invalid">
     Submit
+  </button>
+  <button type="button" class="btn btn-default" (click)="formDir.resetForm({})">
+    Reset
   </button>
 </form>
