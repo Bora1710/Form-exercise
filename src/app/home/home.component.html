@@ -96,7 +96,7 @@
       class="alert alert-danger"
     >
       <div *ngIf="email!.errors?.['required']">Email is required.</div>
-      <div *ngIf="email!.errors">Email must be a valid email address</div>
+      <div *ngIf="email!.hasError('pattern')">Email must be a valid email address</div>
     </div>
   </div>
 

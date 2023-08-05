@@ -30,9 +30,8 @@ export class HomeComponent {
     contact: new FormControl(this.user.contact.phone, Validators.required),
     email: new FormControl(this.user.email, [
       Validators.required,
-      Validators.email,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
-    // Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$') email
     password: new FormControl(this.user.password, [Validators.required, Validators.pattern("^(?=.*[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$")]),
     passwordRepeat: new FormControl(this.user.passwordRepeat , Validators.required),
   });
