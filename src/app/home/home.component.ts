@@ -11,6 +11,7 @@ export class HomeComponent {
   genderOptions = ['Male', 'Female', 'Other']
   user = { name: '', gender: '', date: '', age: 0};
   maxDate: string;
+  calculatedAge!: number;
 
   userForm = new FormGroup({
     name: new FormControl(this.user.name, Validators.required),
@@ -19,8 +20,8 @@ export class HomeComponent {
     age: new FormControl(this.user.age),
   });
   
-  constructor () {const today = new Date();
-    const maxDate = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate());
+  constructor () {let today = new Date();
+    let maxDate = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate());
     this.maxDate = maxDate.toISOString().split('T')[0];
   }
   get name() {
@@ -34,4 +35,18 @@ export class HomeComponent {
   get date() {
     return this.userForm.get('date')!;
   }
+
+  onDateChange(event: Event) {
+    let selectedDate = (event.target as HTMLInputElement).value;
+    let currentDate = new Date();
+    let selected = new Date(selectedDate);
+    let ageDiff =  currentDate.getFullYear() - selected.getFullYear();
+    if (currentDate.getMonth() < selected.getMonth() ||
+        (currentDate.getMonth() === selected.getMonth() && currentDate.getDate() < selected.getDate())) {
+      this.calculatedAge = ageDiff - 1;
+    } else {
+      this.calculatedAge = ageDiff;
+    }
+    this.userForm.controls.age.setValue(this.calculatedAge);
+}
 }
