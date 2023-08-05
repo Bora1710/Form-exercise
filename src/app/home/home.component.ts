@@ -9,13 +9,14 @@ import { Validators } from '@angular/forms';
 })
 export class HomeComponent {
   genderOptions = ['Male', 'Female', 'Other']
-  user = { name: '', gender: '', date: ''};
+  user = { name: '', gender: '', date: '', age: 0};
   maxDate: string;
 
   userForm = new FormGroup({
     name: new FormControl(this.user.name, Validators.required),
     gender: new FormControl(this.user.gender, Validators.required),
-    date: new FormControl(this.user.date, Validators.required)
+    date: new FormControl(this.user.date, Validators.required),
+    age: new FormControl(this.user.age),
   });
   
   constructor () {const today = new Date();
