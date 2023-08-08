@@ -10,7 +10,7 @@ import { Validators } from '@angular/forms';
 export class HomeComponent {
   genderOptions = ['Male', 'Female', 'Other'];
   user = {
-    "name": '',
+    name: '',
     gender: '',
     date: '',
     age: 0,
@@ -94,5 +94,9 @@ export class HomeComponent {
       this.calculatedAge = ageDiff;
     }
     this.userForm.controls.age.setValue(this.calculatedAge);
+  }
+
+  onSubmit() {
+    alert("Congrats! You've submitted your user");
   }
 }

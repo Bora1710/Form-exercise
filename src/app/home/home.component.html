@@ -1,4 +1,4 @@
-<form [formGroup]="userForm">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" formControlName="name" required />
@@ -135,9 +135,4 @@
   <button type="button" class="btn btn-default" (click)="userForm.reset()">
     Reset
   </button>
-
-  <!-- <div class="submitted-message" *ngIf="userForm.submitted">
-    <p>You've submitted your hero, {{ userForm.value.name }}!</p>
-    <button type="button" (click)="userForm.reset()">Add new user</button>
-  </div> -->
 </form>
