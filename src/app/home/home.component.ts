@@ -52,15 +52,15 @@ export class HomeComponent {
     this.maxDate = maxDate.toISOString().split('T')[0];
   }
   get name() {
-    return this.userForm.get('name')!;
+    return this.userForm.get('name');
   }
 
   get gender() {
-    return this.userForm.get('gender')!;
+    return this.userForm.get('gender');
   }
 
   get date() {
-    return this.userForm.get('date')!;
+    return this.userForm.get('date');
   }
 
   get contact() {

@@ -3,11 +3,10 @@
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" formControlName="name" required />
     <div
-      *ngIf="name.invalid && (name.dirty || name.touched)"
+      *ngIf="name?.invalid && (name?.dirty || name?.touched) && name?.errors?.['required']"
       class="alert alert-danger"
     >
-      <!--  moglo je sve u jedan if-->
-      <div *ngIf="name.errors?.['required']">Name is required.</div>
+      <div>Name is required</div>
     </div>
   </div>
 
@@ -19,8 +18,11 @@
       </option>
     </select>
 
-    <div *ngIf="gender.invalid && gender.touched" class="alert alert-danger">
-      <div *ngIf="gender.errors?.['required']">Gender is required.</div>
+    <div
+      *ngIf="gender?.invalid && (gender?.dirty || gender?.touched) && gender?.errors?.['required']"
+      class="alert alert-danger"
+    >
+      <div>Gender is required.</div>
     </div>
   </div>
 
@@ -36,8 +38,11 @@
       required
     />
 
-    <div *ngIf="date.invalid && date.touched" class="alert alert-danger">
-      <div *ngIf="date.errors?.['required']">Date is required.</div>
+    <div
+      *ngIf="date?.invalid && (date?.dirty || date?.touched) && date?.errors?.['required'] "
+      class="alert alert-danger"
+    >
+      <div>Date is required.</div>
     </div>
   </div>
 
@@ -57,11 +62,11 @@
       pattern="06[0-9]{8}"
     />
     <div
-      *ngIf="contact!.invalid && (contact!.dirty || contact!.touched)"
+      *ngIf="contact?.invalid && (contact?.dirty || contact?.touched)"
       class="alert alert-danger"
     >
-      <div *ngIf="contact!.errors?.['required']">Contact is required.</div>
-      <div *ngIf="contact!.hasError('pattern')">
+      <div *ngIf="contact?.errors?.['required']">Contact is required.</div>
+      <div *ngIf="contact?.errors?.['pattern']">
         Contact must start with '06' followed by 8 digits.
       </div>
     </div>
@@ -77,11 +82,11 @@
       required
     />
     <div
-      *ngIf="email!.invalid && (email!.dirty || email!.touched)"
+      *ngIf="email?.invalid && (email?.dirty || email?.touched)"
       class="alert alert-danger"
     >
-      <div *ngIf="email!.errors?.['required']">Email is required.</div>
-      <div *ngIf="email!.hasError('pattern')">
+      <div *ngIf="email?.errors?.['required']">Email is required.</div>
+      <div *ngIf="email?.errors?.['pattern']">
         Email must be a valid email address
       </div>
     </div>
@@ -97,11 +102,11 @@
       required
     />
     <div
-      *ngIf="password!.invalid && (password!.dirty || password!.touched)"
+      *ngIf="password?.invalid && (password?.dirty || password?.touched)"
       class="alert alert-danger"
     >
-      <div *ngIf="password!.errors?.['required']">Password is required.</div>
-      <div *ngIf="password!.errors?.['pattern']">
+      <div *ngIf="password?.errors?.['required']">Password is required.</div>
+      <div *ngIf="password?.errors?.['pattern']">
         min length 8, at least one uppercase, at least one number
       </div>
     </div>
@@ -118,12 +123,12 @@
     />
     <div
       *ngIf="
-        passwordRepeat!.invalid &&
-        (passwordRepeat!.dirty || passwordRepeat!.touched)
+        passwordRepeat?.invalid &&
+        (passwordRepeat?.dirty || passwordRepeat?.touched)
       "
       class="alert alert-danger"
     >
-      <div *ngIf="passwordRepeat!.errors?.['required']">
+      <div *ngIf="passwordRepeat?.errors?.['required']">
         Repeat password is required.
       </div>
     </div>
