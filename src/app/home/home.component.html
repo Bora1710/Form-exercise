@@ -1,43 +1,26 @@
-<form [formGroup]="userForm" #formDir="ngForm"> 
-  <!-- prepraviti ngForm -->
-  <div [hidden]="formDir.submitted">
-
-  <!-- <div
-    class="cross-validation"
-    [class.cross-validation-error]="userForm.errors?.['identityRevealed'] && (userForm.touched || userForm.dirty)"
-  > -->
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        formControlName="name"
-        required
-      />
-      <div
-        *ngIf="name.invalid && (name.dirty || name.touched)"
-        class="alert alert-danger"
-      >
+<form [formGroup]="userForm">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" formControlName="name" required />
+    <div
+      *ngIf="name.invalid && (name.dirty || name.touched)"
+      class="alert alert-danger"
+    >
       <!--  moglo je sve u jedan if-->
-        <div *ngIf="name.errors?.['required']">Name is required.</div>
-      </div>
+      <div *ngIf="name.errors?.['required']">Name is required.</div>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="gender">Gender</label>
-      <select
-        id="gender"
-        class="form-control"
-        formControlName="gender"
-        required
-      >
-        <option *ngFor="let gender of genderOptions" [value]="gender">{{ gender }}</option>
-      </select>
+  <div class="form-group">
+    <label for="gender">Gender</label>
+    <select id="gender" class="form-control" formControlName="gender" required>
+      <option *ngFor="let gender of genderOptions" [value]="gender">
+        {{ gender }}
+      </option>
+    </select>
 
-      <div *ngIf="gender.invalid && gender.touched" class="alert alert-danger">
-        <div *ngIf="gender.errors?.['required']">Gender is required.</div>
-      </div>
+    <div *ngIf="gender.invalid && gender.touched" class="alert alert-danger">
+      <div *ngIf="gender.errors?.['required']">Gender is required.</div>
     </div>
   </div>
 
@@ -98,7 +81,9 @@
       class="alert alert-danger"
     >
       <div *ngIf="email!.errors?.['required']">Email is required.</div>
-      <div *ngIf="email!.hasError('pattern')">Email must be a valid email address</div>
+      <div *ngIf="email!.hasError('pattern')">
+        Email must be a valid email address
+      </div>
     </div>
   </div>
 
@@ -141,21 +126,18 @@
       <div *ngIf="passwordRepeat!.errors?.['required']">
         Repeat password is required.
       </div>
-      <!-- <div *ngIf="password!.errors?.['pattern']">min length 8, at least one uppercase, at least one number</div> -->
     </div>
   </div>
 
   <button type="submit" class="btn btn-default" [disabled]="userForm.invalid">
     Submit
   </button>
-  <button type="button" class="btn btn-default" (click)="formDir.resetForm({})">
+  <button type="button" class="btn btn-default" (click)="userForm.reset()">
     Reset
   </button>
-<!-- </div> -->
 
-  <div class="submitted-message" *ngIf="formDir.submitted">
+  <!-- <div class="submitted-message" *ngIf="userForm.submitted">
     <p>You've submitted your hero, {{ userForm.value.name }}!</p>
-    <button type="button" (click)="formDir.resetForm({})">Add new user</button>
-  </div>
-
+    <button type="button" (click)="userForm.reset()">Add new user</button>
+  </div> -->
 </form>
