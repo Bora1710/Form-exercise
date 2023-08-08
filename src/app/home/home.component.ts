@@ -27,7 +27,12 @@ export class HomeComponent {
     gender: new FormControl(this.user.gender, Validators.required),
     date: new FormControl(this.user.date, Validators.required),
     age: new FormControl(this.user.age),
-    contact: new FormControl(this.user.contact.phone, Validators.required),
+    contact: new FormGroup({
+      phone: new FormControl(this.user.contact.phone, [
+        Validators.required,
+        Validators.pattern('^0[67][0-9]{8}$'),
+      ]),
+    }),
     email: new FormControl(this.user.email, [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
@@ -63,8 +68,8 @@ export class HomeComponent {
     return this.userForm.get('date');
   }
 
-  get contact() {
-    return this.userForm.get('contact');
+  get phone() {
+    return this.userForm.get('contact.phone');
   }
 
   get email() {
