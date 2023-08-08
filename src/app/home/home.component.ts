@@ -10,7 +10,7 @@ import { Validators } from '@angular/forms';
 export class HomeComponent {
   genderOptions = ['Male', 'Female', 'Other'];
   user = {
-    name: '',
+    "name": '',
     gender: '',
     date: '',
     age: 0,
@@ -32,8 +32,14 @@ export class HomeComponent {
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
-    password: new FormControl(this.user.password, [Validators.required, Validators.pattern("^(?=.*[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$")]),
-    passwordRepeat: new FormControl(this.user.passwordRepeat , Validators.required),
+    password: new FormControl(this.user.password, [
+      Validators.required,
+      Validators.pattern('^(?=.*[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$'),
+    ]),
+    passwordRepeat: new FormControl(
+      this.user.passwordRepeat,
+      Validators.required
+    ),
   });
 
   constructor() {

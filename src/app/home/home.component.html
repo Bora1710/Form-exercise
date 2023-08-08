@@ -1,10 +1,11 @@
-<form [formGroup]="userForm" #formDir="ngForm">
+<form [formGroup]="userForm" #formDir="ngForm"> 
+  <!-- prepraviti ngForm -->
   <div [hidden]="formDir.submitted">
 
-  <div
+  <!-- <div
     class="cross-validation"
     [class.cross-validation-error]="userForm.errors?.['identityRevealed'] && (userForm.touched || userForm.dirty)"
-  >
+  > -->
     <div class="form-group">
       <label for="name">Name:</label>
       <input
@@ -18,6 +19,7 @@
         *ngIf="name.invalid && (name.dirty || name.touched)"
         class="alert alert-danger"
       >
+      <!--  moglo je sve u jedan if-->
         <div *ngIf="name.errors?.['required']">Name is required.</div>
       </div>
     </div>
@@ -30,7 +32,7 @@
         formControlName="gender"
         required
       >
-        <option *ngFor="let g of genderOptions" [value]="g">{{ g }}</option>
+        <option *ngFor="let gender of genderOptions" [value]="gender">{{ gender }}</option>
       </select>
 
       <div *ngIf="gender.invalid && gender.touched" class="alert alert-danger">
@@ -149,7 +151,7 @@
   <button type="button" class="btn btn-default" (click)="formDir.resetForm({})">
     Reset
   </button>
-</div>
+<!-- </div> -->
 
   <div class="submitted-message" *ngIf="formDir.submitted">
     <p>You've submitted your hero, {{ userForm.value.name }}!</p>
