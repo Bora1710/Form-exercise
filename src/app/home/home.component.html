@@ -63,15 +63,18 @@
     />
     <div
       *ngIf="
-        userForm.controls.contact.invalid &&
-        (userForm.controls.contact.dirty || userForm.controls.contact.touched)
+        userForm.controls.contact.controls.phone.invalid &&
+        (userForm.controls.contact.controls.phone.dirty ||
+          userForm.controls.contact.controls.phone.touched)
       "
       class="alert alert-danger"
     >
-      <div *ngIf="userForm.controls.contact.errors?.['required']">
+      <div
+        *ngIf="userForm.controls.contact.controls.phone.errors?.['required']"
+      >
         Phone is required.
       </div>
-      <div *ngIf="userForm.controls.contact.errors?.['pattern']">
+      <div *ngIf="userForm.controls.contact.controls.phone.errors?.['pattern']">
         Phone must start with '06' followed by 8 digits.
       </div>
     </div>
