@@ -20,7 +20,7 @@ export class HomeComponent {
     passwordRepeat: '',
   };
   maxDate: string;
-  calculatedAge!: number;
+  calculatedAge?: number;
 
   userForm = new FormGroup({
     name: new FormControl(this.user.name, Validators.required),
