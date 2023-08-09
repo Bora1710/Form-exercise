@@ -3,9 +3,10 @@
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" formControlName="name" required />
     <div
-      *ngIf="name?.invalid && (name?.dirty || name?.touched) && name?.errors?.['required']"
+      *ngIf="userForm.controls.name.invalid && ( userForm.controls.name.dirty || userForm.controls.name.touched) && userForm.controls.name.errors?.['required']"
       class="alert alert-danger"
     >
+      <!-- *ngIf="gender?.invalid && (gender?.dirty || gender?.touched) && gender?.errors?.['required']" ovako je izgledalo sa geterima. Losa praksa je stavljati u html getere i funkcije jer on ne zna vrednost toga i poziva ga svaki put kada mu treba vrednost.  Uradili smo sa kontrolama, domaci uraditi sa pajpom ovde ili u sledecem projektu -->
       <div>Name is required</div>
     </div>
   </div>
@@ -19,7 +20,7 @@
     </select>
 
     <div
-      *ngIf="gender?.invalid && (gender?.dirty || gender?.touched) && gender?.errors?.['required']"
+      *ngIf="userForm.controls.gender.invalid && (userForm.controls.gender.dirty || userForm.controls.gender.touched) && userForm.controls.gender.errors?.['required']"
       class="alert alert-danger"
     >
       <div>Gender is required.</div>
@@ -39,7 +40,7 @@
     />
 
     <div
-      *ngIf="date?.invalid && (date?.dirty || date?.touched) && date?.errors?.['required'] "
+      *ngIf="userForm.controls.date.invalid && (userForm.controls.date.dirty || userForm.controls.date.touched) && userForm.controls.date.errors?.['required'] "
       class="alert alert-danger"
     >
       <div>Date is required.</div>
@@ -61,11 +62,16 @@
       required
     />
     <div
-      *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+      *ngIf="
+        userForm.controls.contact.invalid &&
+        (userForm.controls.contact.dirty || userForm.controls.contact.touched)
+      "
       class="alert alert-danger"
     >
-      <div *ngIf="phone?.errors?.['required']">Phone is required.</div>
-      <div *ngIf="phone?.errors?.['pattern']">
+      <div *ngIf="userForm.controls.contact.errors?.['required']">
+        Phone is required.
+      </div>
+      <div *ngIf="userForm.controls.contact.errors?.['pattern']">
         Phone must start with '06' followed by 8 digits.
       </div>
     </div>
@@ -81,11 +87,16 @@
       required
     />
     <div
-      *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+      *ngIf="
+        userForm.controls.email.invalid &&
+        (userForm.controls.email.dirty || userForm.controls.email.touched)
+      "
       class="alert alert-danger"
     >
-      <div *ngIf="email?.errors?.['required']">Email is required.</div>
-      <div *ngIf="email?.errors?.['pattern']">
+      <div *ngIf="userForm.controls.email.errors?.['required']">
+        Email is required.
+      </div>
+      <div *ngIf="userForm.controls.email.errors?.['pattern']">
         Email must be a valid email address
       </div>
     </div>
@@ -101,11 +112,16 @@
       required
     />
     <div
-      *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+      *ngIf="
+        userForm.controls.password.invalid &&
+        (userForm.controls.password.dirty || userForm.controls.password.touched)
+      "
       class="alert alert-danger"
     >
-      <div *ngIf="password?.errors?.['required']">Password is required.</div>
-      <div *ngIf="password?.errors?.['pattern']">
+      <div *ngIf="userForm.controls.password.errors?.['required']">
+        Password is required.
+      </div>
+      <div *ngIf="userForm.controls.password.errors?.['pattern']">
         min length 8, at least one uppercase, at least one number
       </div>
     </div>
@@ -122,12 +138,13 @@
     />
     <div
       *ngIf="
-        passwordRepeat?.invalid &&
-        (passwordRepeat?.dirty || passwordRepeat?.touched)
+        userForm.controls.passwordRepeat.invalid &&
+        (userForm.controls.passwordRepeat.dirty ||
+          userForm.controls.passwordRepeat.touched)
       "
       class="alert alert-danger"
     >
-      <div *ngIf="passwordRepeat?.errors?.['required']">
+      <div *ngIf="userForm.controls.passwordRepeat.errors?.['required']">
         Repeat password is required.
       </div>
     </div>

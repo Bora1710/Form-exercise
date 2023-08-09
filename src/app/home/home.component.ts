@@ -56,33 +56,6 @@ export class HomeComponent {
     );
     this.maxDate = maxDate.toISOString().split('T')[0];
   }
-  get name() {
-    return this.userForm.get('name');
-  }
-
-  get gender() {
-    return this.userForm.get('gender');
-  }
-
-  get date() {
-    return this.userForm.get('date');
-  }
-
-  get phone() {
-    return this.userForm.get('contact.phone');
-  }
-
-  get email() {
-    return this.userForm.get('email');
-  }
-
-  get password() {
-    return this.userForm.get('password');
-  }
-
-  get passwordRepeat() {
-    return this.userForm.get('passwordRepeat');
-  }
 
   onDateChange(event: Event) {
     let selectedDate = (event.target as HTMLInputElement).value;
