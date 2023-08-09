@@ -55,23 +55,25 @@ export class HomeComponent {
       today.getDate()
     );
     this.maxDate = maxDate.toISOString().split('T')[0];
-  }
 
-  onDateChange(event: Event) {
-    let selectedDate = (event.target as HTMLInputElement).value;
-    let currentDate = new Date();
-    let selected = new Date(selectedDate);
-    let ageDiff = currentDate.getFullYear() - selected.getFullYear();
-    if (
-      currentDate.getMonth() < selected.getMonth() ||
-      (currentDate.getMonth() === selected.getMonth() &&
-        currentDate.getDate() < selected.getDate())
-    ) {
-      this.calculatedAge = ageDiff - 1;
-    } else {
-      this.calculatedAge = ageDiff;
-    }
-    this.userForm.controls.age.setValue(this.calculatedAge);
+    this.userForm.controls.date.valueChanges.subscribe((value) => {
+      if (value) {
+        let selectedDate = value;
+        let currentDate = new Date();
+        let selected = new Date(selectedDate);
+        let ageDiff = currentDate.getFullYear() - selected.getFullYear();
+        if (
+          currentDate.getMonth() < selected.getMonth() ||
+          (currentDate.getMonth() === selected.getMonth() &&
+            currentDate.getDate() < selected.getDate())
+        ) {
+          this.calculatedAge = ageDiff - 1;
+        } else {
+          this.calculatedAge = ageDiff;
+        }
+        this.userForm.controls.age.setValue(this.calculatedAge);
+      }
+    });
   }
 
   onSubmit() {
