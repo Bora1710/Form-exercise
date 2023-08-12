@@ -152,6 +152,15 @@
     </div>
   </div>
 
+  <div formArrayName="hobbies">
+    <div *ngFor="let hobby of userForm.controls.hobbies.value; let i = index" [formGroupName]="i">
+      <label>Hobby:</label>
+      <input type="text" type="checkbox" formControlName="hobyName">
+    </div>
+    <button type="button" (click)="addHobby()">Add hobby</button>
+    <button type="button" (click)="removeHobby(0)">Remove</button>
+  </div>
+
   <button type="submit" class="btn btn-default" [disabled]="userForm.invalid">
     Submit
   </button>

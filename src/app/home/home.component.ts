@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { confirmPasswordValidator } from './matchpassword.validator';
 
 @Component({
   selector: 'app-home',
@@ -18,34 +19,43 @@ export class HomeComponent {
     email: '',
     password: '',
     passwordRepeat: '',
+    hobbies: [],
   };
   maxDate: string;
   calculatedAge?: number;
 
-  userForm = new FormGroup({
-    name: new FormControl(this.user.name, Validators.required),
-    gender: new FormControl(this.user.gender, Validators.required),
-    date: new FormControl(this.user.date, Validators.required),
-    age: new FormControl(this.user.age),
-    contact: new FormGroup({
-      phone: new FormControl(this.user.contact.phone, [
+  userForm = new FormGroup(
+    {
+      name: new FormControl(this.user.name, Validators.required),
+      gender: new FormControl(this.user.gender, Validators.required),
+      date: new FormControl(this.user.date, Validators.required),
+      age: new FormControl(this.user.age),
+      contact: new FormGroup({
+        phone: new FormControl(this.user.contact.phone, [
+          Validators.required,
+          Validators.pattern('^0[67][0-9]{8}$'),
+        ]),
+      }),
+      email: new FormControl(this.user.email, [
         Validators.required,
-        Validators.pattern('^0[67][0-9]{8}$'),
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ]),
-    }),
-    email: new FormControl(this.user.email, [
-      Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-    ]),
-    password: new FormControl(this.user.password, [
-      Validators.required,
-      Validators.pattern('^(?=.*[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$'),
-    ]),
-    passwordRepeat: new FormControl(
-      this.user.passwordRepeat,
-      Validators.required
-    ),
-  });
+      password: new FormControl(this.user.password, [
+        Validators.required,
+        Validators.pattern('^(?=.*[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$'),
+      ]),
+      passwordRepeat: new FormControl(
+        this.user.passwordRepeat,
+        Validators.required
+      ),
+      hobbies: new FormArray([
+        new FormGroup({
+          hobyName: new FormControl('', Validators.required),
+        }),
+      ]),
+    },
+    { validators: confirmPasswordValidator }
+  );
 
   constructor() {
     let today = new Date();
@@ -74,6 +84,20 @@ export class HomeComponent {
         this.userForm.controls.age.setValue(this.calculatedAge);
       }
     });
+  }
+
+  addHobby() {
+    let hobbies = this.userForm.get('hobbies') as FormArray;
+    hobbies.push(
+      new FormGroup({
+        hobbyName: new FormControl(''),
+      })
+    );
+  }
+
+  removeHobby(index: number) {
+    let hobbies = this.userForm.get('hobbies') as FormArray;
+    hobbies.removeAt(index);
   }
 
   onSubmit() {
