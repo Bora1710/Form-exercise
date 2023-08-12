@@ -44,17 +44,26 @@ export class HomeComponent {
         Validators.required,
         Validators.pattern('^(?=.*[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$'),
       ]),
-      passwordRepeat: new FormControl(
-        this.user.passwordRepeat,
-        Validators.required
-      ),
+      passwordRepeat: new FormControl(this.user.passwordRepeat, [
+        Validators.required,
+        confirmPasswordValidator,
+      ]),
       hobbies: new FormArray([
         new FormGroup({
-          hobyName: new FormControl('', Validators.required),
+          hobbyName: new FormControl('Football'),
+          selected: new FormControl(false),
+        }),
+        new FormGroup({
+          hobbyName: new FormControl('Basketball'),
+          selected: new FormControl(false),
+        }),
+        new FormGroup({
+          hobbyName: new FormControl('Inline skating'),
+          selected: new FormControl(false),
         }),
       ]),
     },
-    { validators: confirmPasswordValidator }
+    // { validators: confirmPasswordValidator }
   );
 
   constructor() {

@@ -6,9 +6,9 @@
   border-left: 5px solid #42a948; /* green */
 }
 
-/* .ng-invalid:not(form)  {
-    border-left: px solid #a94442; 
-  }   ovo nije radilo pa mogu cackati kada budem imao vremena */
+.ng-invalid:not(form, [formgroupname]) {
+  border-left: 5px solid #a94442;
+}
 
 .alert div {
   background-color: #fed3d3;

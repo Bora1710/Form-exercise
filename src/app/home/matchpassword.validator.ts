@@ -3,7 +3,6 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export const confirmPasswordValidator: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
-  return control.value.password === control.value.passwordRepeat
-    ? null
-    : { PasswordMatch: false };
+  let form = control.parent;
+  return control.value === form?.value.password ? null : { invalidMatch: true };
 };
